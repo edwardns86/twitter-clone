@@ -38,7 +38,7 @@ function isHashTag(a) {
         if (firstChar === "#") {
             appState.tweets[index].hashtags.push(word)
             return `
-                <a href ="#">${word}</a>            
+                <a href ="#" onclick="searchHashtag('${word}')">${word}</a>            
             `
         }
         else
@@ -70,13 +70,11 @@ function addTweet() {
     appState.tweets.push(obj);
     // console.log(appState)
 
-    renderTweet(appState);
+    renderTweet(appState.tweets);
     document.getElementById('tweet-content').value = "";
 }
 
-function renderTweet(appState) {
-    let tweets = appState.tweets;
-
+function renderTweet(tweets) {
     const tweetHTML = tweets.map(tweet => {
         console.log("id",tweet.id)
         return `
@@ -122,5 +120,15 @@ function like(idx) {
 function deleteTweet(a) {
     let index = appState.tweets.findIndex( tweet => tweet.id === a);
     appState.tweets.splice(index, 1)
-    renderTweet(appState);
+    renderTweet(appState.tweets);
+}
+
+function searchHashtag(selectedHashTag) {
+    const result = appState.tweets.filter(tweet => {
+        if (tweet.hashtags.includes(selectedHashTag))
+        return tweet;
+    })
+    console.log('test ',result);
+
+    renderTweet(result)
 }
