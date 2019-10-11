@@ -1,5 +1,7 @@
 #tweet-content {
   min-height: 130px;
+  background-color: #F7F7F8;
+  border: none;
 }
 
 #board {
@@ -31,7 +33,7 @@
 .button-container {
   display: flex;
   justify-content: space-evenly;
-  border: 1px dotted green;
+  /* border: 1px dotted green; */
   margin-bottom: 10px;
 }
 .button-container button {
@@ -53,14 +55,29 @@
 .comment-card {
   width: 90%;
   margin: 0 auto;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 }
 
 .username {
-    font-size: 30px;
+    /* font-size: 30px; */
 }
 
 .fa-twitter-square {
     font-size: 40px;
     color: #0386e3
+}
+
+#currentUsername {
+    height: 32px;
+    width: 300px;
+    border: none;
+}
+
+#signinButton {
+    background-color: #6336BE;
+    color: white;
+}
+
+.bg-custom {
+    background-color: #E6DEF5;
 }

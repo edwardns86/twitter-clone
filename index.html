@@ -23,17 +23,23 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand"><i class="fab fa-twitter-square"> Twitter</i></a>
-      <form class="form-inline">
+    <nav class="navbar navbar-light bg-custom">
+      <a class="navbar-brand"><img src="img/logo.png" alt=""></a>
+      <form class="form-inline" onsubmit="event.preventDefault()">
         <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
+          id="currentUsername"
+          class="form-control username mr-lg-2"
+          type="text"
+          placeholder="Enter Username"
+          aria-label="Username Input Field"
         />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
+        <button
+          class="btn btn-outline-success my-2 my-sm-0"
+          id="signinButton"
+          type="submit"
+          onclick="createUsername()"
+        >
+          Sign In
         </button>
       </form>
     </nav>
@@ -56,68 +62,7 @@
         </div>
         <div id="count"></div>
         <div class="row" id="board">
-          <div class="col-lg-12 col-md-12 col-xs-12 custom-card">
-            <div class="tweet-head">
-              <div>
-                <p>
-                  <b class="username">username</b> created at
-                  <i>date from now</i>
-                </p>
-              </div>
-              <button class="btn btn-danger btn-delete">
-                <i class="far fa-trash-alt"></i> Delete
-              </button>
-            </div>
-            <div>
-              <h1>Tweet content</h1>
-            </div>
-            <div class="button-container">
-              <button class="btn btn-warning like-btn">
-                <i class="far fa-thumbs-up"></i> Like
-              </button>
-              <button class="btn btn-success retweet-btn">
-                <i class="far fa-comment"></i> Comment
-              </button>
-              <button class="btn btn-primary">
-                <i class="fas fa-retweet"></i> Retweet
-              </button>
-            </div>
-            <div class="comment-section">
-              <div class="comment-card">
-                <div>
-                  <h1>Tweet content</h1>
-                </div>
-                <div>
-                  <p>
-                    <b class="username">username</b> created at
-                    <i>date from now</i>
-                  </p>
-                </div>
-              </div>
-              <div class="comment-card">
-                <div>
-                  <h1>Tweet content</h1>
-                </div>
-                <div>
-                  <p>
-                    <b class="username">username</b> created at
-                    <i>date from now</i>
-                  </p>
-                </div>
-              </div>
-              <div class="comment-card">
-                <div>
-                  <h1>Tweet content</h1>
-                </div>
-                <div>
-                  <p>
-                    <b class="username">username</b> created at
-                    <i>date from now</i>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </section>

@@ -1,14 +1,35 @@
 const maxCharacters = 140;
 const inputField = document.getElementById("tweet-content");
-const tweetButton = document.getElementById("tweet");
+let tweetButton = document.getElementById("tweet");
 let id = 0;
 inputField.addEventListener("input", checkInput);
 inputField.setAttribute("maxLength", maxCharacters);
+let appState = {
+  status: false,
+  tweets: []
+};
+document.getElementById("tweet").style.display = "none";
+
+function createUsername() {
+  let currentUser = document.getElementById("currentUsername").value;
+  if (currentUser === "") {
+    appState.status = false;
+    tweetButton.disabled = true;
+  } else {
+    appState.status = true;
+    tweetButton.disabled = false;
+    document.getElementById("tweet").style.display = "block";
+  }
+  console.log("checking our check input", appState);
+}
 
 function checkInput() {
   const value = inputField.value;
   const remainChar = maxCharacters - value.length;
+
   document.getElementById("character").innerHTML = remainChar;
+  console.log("red", value.length === "");
+
   if (value.length > maxCharacters) {
     tweetButton.disabled = true;
     document.getElementById("character").style.color = "red";
@@ -18,11 +39,6 @@ function checkInput() {
     tweetButton.disabled = false;
   }
 }
-
-let appState = {
-  status: false,
-  tweets: []
-};
 
 function isHashTag(a) {
   console.log("app state", appState);
@@ -59,10 +75,12 @@ function printName(name) {
 }
 
 function addTweet() {
+  let currentUser = document.getElementById("currentUsername").value;
   let tweetcontent = document.getElementById("tweet-content").value;
+  if (tweetcontent === "") return;
   let obj = {
     id: id++,
-    username: "anonymous",
+    username: currentUser,
     content: tweetcontent,
     hashtags: [],
     date: new Date(),
@@ -71,7 +89,6 @@ function addTweet() {
     isRetweeted: false
   };
   appState.tweets.unshift(obj);
-  // console.log(appState)
 
   renderTweet(appState.tweets);
   document.getElementById("tweet-content").value = "";
@@ -81,33 +98,47 @@ function renderTweet(tweets) {
   let repliesContainer = [];
   const tweetHTML = tweets
     .map(tweet => {
-      if (tweet.replies.length > 0) {
-        repliesContainer.push(tweet.replies);
-      }
-      return `  
+        console.log("replies" ,tweet.replies)
+      return `
         <div class="col-lg-12 col-md-12 col-xs-12 custom-card">
-        <h1>${isHashTag(tweet.id)}</h1>
-        <h2>${tweet.username}</h2>
-        <p>${moment(tweet.date).fromNow()}</p>
-        <button class="btn btn-primary" onclick="retweet(${
-          tweet.id
-        })">Retweet</button>
-        <button class="btn retweet-btn" onclick="replies(${
-          tweet.id
-        })">Comment</button>
-        <button id="like-${tweet.id}"class="btn like-btn" onclick="like(${
-        tweet.id
-      })">Like</button>
-        <button class="btn btn-danger" onclick="deleteTweet(${
-          tweet.id
-        })">Delete</button>
-        <div id="retweet-${tweet.id}"></div>
-        </div>
+            <div class="tweet-head">
+              <div>
+                <p>
+                  <b class="username">${tweet.username}</b> created at
+                  <i>${moment(tweet.date).fromNow()}</i>
+                </p>
+              </div>
+              <button class="btn btn-danger btn-delete" onclick="deleteTweet(${
+                tweet.id
+              })">
+                <i class="far fa-trash-alt"></i> Delete
+              </button>
+            </div>
+            <div>
+              <h1>${isHashTag(tweet.id)}</h1>
+            </div>
+            <div class="button-container">
+              <button class="btn btn-warning like-btn" onclick="like(${
+                tweet.id
+              })">
+                <i class="far fa-thumbs-up"></i> <span id="like-${
+                  tweet.id
+                }">Like</span>
+              </button>
+              <button class="btn btn-success" onclick="replies(${tweet.id})">
+                <i class="far fa-comment"></i> Comment
+              </button>
+              <button class="btn btn-primary" onclick="retweet(${tweet.id})">
+                <i class="fas fa-retweet"></i> Retweet
+              </button>
+            </div>
+            <div id="retweet-${tweet.id}">
+              
+            </div>
+          </div>
         `;
     })
     .join("");
-
-  console.log(repliesContainer);
 
   document.getElementById("board").innerHTML = tweetHTML;
   document.getElementById("count").innerHTML = tweets.length; // number of tweets
@@ -115,21 +146,30 @@ function renderTweet(tweets) {
 
 function replies(a) {
   let index = appState.tweets.findIndex(tweet => tweet.id === a);
+  let currentUser = document.getElementById("currentUsername").value;
   const getTweet = appState.tweets[index];
   let promtInput = prompt("enter your message");
+
+  const commentHTML = document.getElementById(`retweet-${a}`).innerHTML;
   const obj = {
-    name: promtInput
+    content: promtInput,
+    user: currentUser,
+    date: new Date()
   };
   console.log(getTweet);
   const retweetHTML = `   
-        <h1>Retweet with love by ${promtInput}</h1>
-        <h6>${getTweet.content}</h6>
-        <h2>${getTweet.username}</h2>
-        <p>${moment(new Date()).fromNow()}</p>
-       
-
-        `;
-  document.getElementById(`retweet-${a}`).innerHTML = retweetHTML;
+        <div class="comment-card">
+            <div>
+            <h1>${promtInput}</h1>
+            </div>
+            <div>
+                <p>
+                <b class="username">${currentUser}</b> commented at
+                <i>${moment(new Date()).fromNow()}</i>
+                </p>
+            </div>
+        </div>`;
+  document.getElementById(`retweet-${a}`).innerHTML = commentHTML + retweetHTML;
   appState.tweets[index].replies.push(obj);
 }
 
