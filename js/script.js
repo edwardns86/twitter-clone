@@ -1,15 +1,37 @@
 const maxCharacters = 140;
 const inputField = document.getElementById('tweet-content');
-const tweetButton = document.getElementById('tweet');
+let tweetButton = document.getElementById('tweet');
 let id = 0;
 inputField.addEventListener('input', checkInput);
 inputField.setAttribute("maxLength", maxCharacters);
+let appState = {
+    status: false,
+    tweets: []
+}
+document.getElementById('tweet').style.display = 'none'
+
+
+function createUsername() {
+    let currentUser = document.getElementById('currentUsername').value 
+    if (currentUser=== "") {
+        appState.status = false;
+        tweetButton.disabled = true;
+    } else {       
+        appState.status = true;
+        tweetButton.disabled = false;
+        document.getElementById('tweet').style.display = 'block'
+    }
+    console.log("checking our check input", appState)
+}
 
 
 function checkInput() {
     const value = inputField.value;
     const remainChar = maxCharacters - value.length;
+
     document.getElementById('character').innerHTML = remainChar;
+    console.log("red", value.length === '');
+   
     if (value.length > maxCharacters) {
         tweetButton.disabled = true;
         document.getElementById('character').style.color = 'red'
@@ -18,17 +40,16 @@ function checkInput() {
     } else {
         document.getElementById('character').style.color = 'black';
         tweetButton.disabled = false;
+        
     }
 }
 
-let appState = {
-    status: false,
-    tweets: []
-}
+
+
 
 function isHashTag(a) {
     console.log("app state", appState);
-    const index = appState.tweets.findIndex( tweet => tweet.id == a);
+    const index = appState.tweets.findIndex(tweet => tweet.id == a);
     const value = appState.tweets[index];
     console.log(value)
     const splitValue = value.content.split(' ');
@@ -57,10 +78,13 @@ function printName(name) {
 }
 
 function addTweet() {
+    
+    let currentUser = document.getElementById('currentUsername').value 
     let tweetcontent = document.getElementById("tweet-content").value;
+    if (tweetcontent === '') return;
     let obj = {
         id: id++,
-        username: "anonymous",
+        username: currentUser ,
         content: tweetcontent,
         hashtags: [],
         date: new Date(),
@@ -69,16 +93,16 @@ function addTweet() {
         isRetweeted: false
     };
     appState.tweets.unshift(obj);
-    // console.log(appState)
+    
 
     renderTweet(appState.tweets);
     document.getElementById('tweet-content').value = "";
 }
 
 function renderTweet(tweets) {
-    let repliesContainer =[];
+    let repliesContainer = [];
     const tweetHTML = tweets.map(tweet => {
-        if(tweet.replies.length > 0){
+        if (tweet.replies.length > 0) {
             repliesContainer.push(tweet.replies);
         }
         return `
@@ -92,7 +116,7 @@ function renderTweet(tweets) {
         <div id="retweet-${tweet.id}"></div>
         `
     }).join('');
-    
+
     console.log(repliesContainer)
 
     document.getElementById('board').innerHTML = tweetHTML;
@@ -100,7 +124,7 @@ function renderTweet(tweets) {
 }
 
 function replies(a) {
-    let index = appState.tweets.findIndex( tweet => tweet.id === a);
+    let index = appState.tweets.findIndex(tweet => tweet.id === a);
     const getTweet = appState.tweets[index];
     let promtInput = prompt("enter your message")
     const obj = {
@@ -120,13 +144,13 @@ function replies(a) {
 }
 
 function retweet(a) {
-    const currTweet = appState.tweets.filter( tweet => tweet.id === a);
+    const currTweet = appState.tweets.filter(tweet => tweet.id === a);
     currTweet[0].isRetweeted = true;
     const whyYouShare = prompt("Why you share ?");
     let obj = {
         id: id++,
         username: "anonymous",
-        content:  `${whyYouShare} ` +currTweet[0].content,
+        content: `${whyYouShare} ` + currTweet[0].content,
         hashtags: [],
         date: new Date(),
         liked: false,
@@ -134,14 +158,14 @@ function retweet(a) {
         parentID: currTweet[0].id,
         isRetweeted: false
     };
-console.log("tweet Obj", obj)
+    console.log("tweet Obj", obj)
     appState.tweets.unshift(obj);
     renderTweet(appState.tweets)
 
 }
 
 function like(a) {
-    let index = appState.tweets.findIndex( tweet => tweet.id === a);
+    let index = appState.tweets.findIndex(tweet => tweet.id === a);
     const getTweet = appState.tweets[index];
     getTweet.liked = !getTweet.liked;
     console.log(getTweet.liked)
@@ -149,7 +173,7 @@ function like(a) {
 }
 
 function deleteTweet(a) {
-    let index = appState.tweets.findIndex( tweet => tweet.id === a);
+    let index = appState.tweets.findIndex(tweet => tweet.id === a);
     appState.tweets.splice(index, 1)
     renderTweet(appState.tweets);
 }
@@ -157,9 +181,9 @@ function deleteTweet(a) {
 function searchHashtag(selectedHashTag) {
     const result = appState.tweets.filter(tweet => {
         if (tweet.hashtags.includes(selectedHashTag))
-        return tweet;
+            return tweet;
     })
-    console.log('test ',result);
+    console.log('test ', result);
 
     renderTweet(result)
 }
