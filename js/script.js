@@ -201,7 +201,7 @@ function retweet(a) {
   currTweet[0].isRetweeted = true;
   const whyYouShare = prompt("Why you share ?");
   let obj = {
-    id: id++,
+    id: appState.id++,
     username: "anonymous",
     content: `${whyYouShare} ` + currTweet[0].content,
     hashtags: [],
