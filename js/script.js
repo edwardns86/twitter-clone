@@ -4,12 +4,22 @@ let tweetButton = document.getElementById('tweet');
 let id = 0;
 inputField.addEventListener('input', checkInput);
 inputField.setAttribute("maxLength", maxCharacters);
-let appState = {
-    status: false,
-    tweets: []
-}
-document.getElementById('tweet').style.display = 'none'
+const getAppState= () => {
+    return JSON.parse(localStorage.getItem('data')) || {
+        status: false,
+        tweets: []
+      }
+    }
 
+const saveAppState= obj => {
+localStorage.setItem("data", JSON.stringify(obj))
+}
+
+let appState = getAppState()
+//localStorage.setItem("test", JSON.stringify(appState))
+
+
+document.getElementById('tweet').style.display = 'none'
 
 function createUsername() {
     let currentUser = document.getElementById('currentUsername').value 
@@ -92,6 +102,7 @@ function addTweet() {
         replies: [],
         isRetweeted: false
     };
+    appState.currentUser = currentUser; // currently not doing anything but we might need later 
     appState.tweets.unshift(obj);
     
 
@@ -120,7 +131,9 @@ function renderTweet(tweets) {
     console.log(repliesContainer)
 
     document.getElementById('board').innerHTML = tweetHTML;
-    document.getElementById('count').innerHTML = tweets.length; // number of tweets
+    document.getElementById('count').innerHTML = tweets.length; 
+    console.log("hjhhj");
+    saveAppState({status: true , tweets})
 }
 
 function replies(a) {
