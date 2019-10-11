@@ -43,7 +43,7 @@ function isHashTag(a) {
         }
         else
             return word;
-    }).join(" ")
+    }).join(" ");
     return text
 }
 
@@ -65,9 +65,10 @@ function addTweet() {
         hashtags: [],
         date: new Date(),
         liked: false,
-        retweet: []
+        replies: [],
+        isRetweeted: false
     };
-    appState.tweets.push(obj);
+    appState.tweets.unshift(obj);
     // console.log(appState)
 
     renderTweet(appState.tweets);
@@ -75,25 +76,32 @@ function addTweet() {
 }
 
 function renderTweet(tweets) {
+    let repliesContainer =[];
     const tweetHTML = tweets.map(tweet => {
-        console.log("id",tweet.id)
+        if(tweet.replies.length > 0){
+            repliesContainer.push(tweet.replies);
+        }
         return `
         <h1>${isHashTag(tweet.id)}</h1>
         <h2>${tweet.username}</h2>
-        <p>${tweet.date}</p>
-        <button class="btn retweet-btn" onclick="retweet(${tweet.id})">Retweet</button>
+        <p>${moment(tweet.date).fromNow()}</p>
+        <button class="btn btn-primary" onclick="retweet(${tweet.id})">Retweet</button>
+        <button class="btn retweet-btn" onclick="replies(${tweet.id})">Comment</button>
         <button id="like-${tweet.id}"class="btn like-btn" onclick="like(${tweet.id})">Like</button>
         <button class="btn btn-danger" onclick="deleteTweet(${tweet.id})">Delete</button>
         <div id="retweet-${tweet.id}"></div>
         `
-    }).join('')
+    }).join('');
+    
+    console.log(repliesContainer)
 
     document.getElementById('board').innerHTML = tweetHTML;
     document.getElementById('count').innerHTML = tweets.length; // number of tweets
 }
 
-function retweet(idx) {
-    const getTweet = appState.tweets[idx];
+function replies(a) {
+    let index = appState.tweets.findIndex( tweet => tweet.id === a);
+    const getTweet = appState.tweets[index];
     let promtInput = prompt("enter your message")
     const obj = {
         name: promtInput
@@ -103,18 +111,41 @@ function retweet(idx) {
         <h1>Retweet with love by ${promtInput}</h1>
         <h6>${getTweet.content}</h6>
         <h2>${getTweet.username}</h2>
-        <p>${new Date()}</p>
+        <p>${moment(new Date()).fromNow()}</p>
        
 
         `
-    document.getElementById(`retweet-${idx}`).innerHTML = retweetHTML;
-    appState.tweets[idx].retweet.push(obj)
+    document.getElementById(`retweet-${a}`).innerHTML = retweetHTML;
+    appState.tweets[index].replies.push(obj)
 }
 
-function like(idx) {
-    const getTweet = appState.tweets[idx];
+function retweet(a) {
+    const currTweet = appState.tweets.filter( tweet => tweet.id === a);
+    currTweet[0].isRetweeted = true;
+    const whyYouShare = prompt("Why you share ?");
+    let obj = {
+        id: id++,
+        username: "anonymous",
+        content:  `${whyYouShare} ` +currTweet[0].content,
+        hashtags: [],
+        date: new Date(),
+        liked: false,
+        replies: [],
+        parentID: currTweet[0].id,
+        isRetweeted: false
+    };
+console.log("tweet Obj", obj)
+    appState.tweets.unshift(obj);
+    renderTweet(appState.tweets)
+
+}
+
+function like(a) {
+    let index = appState.tweets.findIndex( tweet => tweet.id === a);
+    const getTweet = appState.tweets[index];
     getTweet.liked = !getTweet.liked;
-    getTweet.liked ? document.getElementById(`like-${idx}`).innerHTML = 'Like' : document.getElementById(`like-${idx}`).innerHTML = 'Unlike';
+    console.log(getTweet.liked)
+    getTweet.liked ? document.getElementById(`like-${a}`).innerHTML = 'Like' : document.getElementById(`like-${a}`).innerHTML = 'Unlike';
 }
 
 function deleteTweet(a) {
