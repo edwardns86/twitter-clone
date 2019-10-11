@@ -1,0 +1,66 @@
+#tweet-content {
+  min-height: 130px;
+}
+
+#board {
+  margin-top: 10px;
+}
+
+#tweet-contain {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#tweet {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+#below-input {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.tweet-head {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  border: 1px dotted green;
+  margin-bottom: 10px;
+}
+.button-container button {
+  width: 100%;
+  border-radius: 0;
+  color: white;
+}
+
+.btn-delete {
+    height: 70%;
+    margin: auto 0;
+}
+
+.custom-card {
+  /* border: 1px solid red; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.comment-card {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid blue;
+}
+
+.username {
+    font-size: 30px;
+}
+
+.fa-twitter-square {
+    font-size: 40px;
+    color: #0386e3
+}
