@@ -4,10 +4,22 @@ let tweetButton = document.getElementById("tweet");
 let id = 0;
 inputField.addEventListener("input", checkInput);
 inputField.setAttribute("maxLength", maxCharacters);
-let appState = {
-  status: false,
-  tweets: []
+const getAppState = () => {
+  return (
+    JSON.parse(localStorage.getItem("data")) || {
+      status: false,
+      tweets: []
+    }
+  );
 };
+
+const saveAppState = obj => {
+  localStorage.setItem("data", JSON.stringify(obj));
+};
+
+let appState = getAppState();
+//localStorage.setItem("test", JSON.stringify(appState))
+
 document.getElementById("tweet").style.display = "none";
 
 function createUsername() {
@@ -98,7 +110,7 @@ function renderTweet(tweets) {
   let repliesContainer = [];
   const tweetHTML = tweets
     .map(tweet => {
-        console.log("replies" ,tweet.replies)
+      console.log("replies", tweet.replies);
       return `
         <div class="col-lg-12 col-md-12 col-xs-12 custom-card">
             <div class="tweet-head">
@@ -142,6 +154,7 @@ function renderTweet(tweets) {
 
   document.getElementById("board").innerHTML = tweetHTML;
   document.getElementById("count").innerHTML = tweets.length; // number of tweets
+  saveAppState({ status: true, tweets });
 }
 
 function replies(a) {
