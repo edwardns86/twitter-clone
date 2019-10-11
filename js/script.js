@@ -1,23 +1,33 @@
 const maxCharacters = 140;
 const inputField = document.getElementById("tweet-content");
 let tweetButton = document.getElementById("tweet");
-let id = 0;
+let appState;
 inputField.addEventListener("input", checkInput);
 inputField.setAttribute("maxLength", maxCharacters);
 const getAppState = () => {
   return (
     JSON.parse(localStorage.getItem("data")) || {
       status: false,
+      id: 0,
       tweets: []
     }
   );
 };
 
+const getAPI = async () => {
+    let url = "https://api.myjson.com/bins/11kom6";
+    let result = await fetch(url);
+    let json = await result .json();
+    let obj = await json.tweets;
+
+    // renderTweet(obj)
+    appState = await json;
+}
+
 const saveAppState = obj => {
   localStorage.setItem("data", JSON.stringify(obj));
 };
 
-let appState = getAppState();
 //localStorage.setItem("test", JSON.stringify(appState))
 
 document.getElementById("tweet").style.display = "none";
@@ -31,6 +41,7 @@ function createUsername() {
     appState.status = true;
     tweetButton.disabled = false;
     document.getElementById("tweet").style.display = "block";
+    renderTweet(appState.tweets)
   }
   console.log("checking our check input", appState);
 }
@@ -53,10 +64,9 @@ function checkInput() {
 }
 
 function isHashTag(a) {
-  console.log("app state", appState);
   const index = appState.tweets.findIndex(tweet => tweet.id == a);
   const value = appState.tweets[index];
-  console.log(value);
+  console.log(appState)
   const splitValue = value.content.split(" ");
 
   const text = splitValue
@@ -91,7 +101,7 @@ function addTweet() {
   let tweetcontent = document.getElementById("tweet-content").value;
   if (tweetcontent === "") return;
   let obj = {
-    id: id++,
+    id: appState.id++,
     username: currentUser,
     content: tweetcontent,
     hashtags: [],
@@ -107,7 +117,6 @@ function addTweet() {
 }
 
 function renderTweet(tweets) {
-  let repliesContainer = [];
   const tweetHTML = tweets
     .map(tweet => {
       console.log("replies", tweet.replies);
@@ -154,7 +163,8 @@ function renderTweet(tweets) {
 
   document.getElementById("board").innerHTML = tweetHTML;
   document.getElementById("count").innerHTML = tweets.length; // number of tweets
-  saveAppState({ status: true, tweets });
+  appState.status = true;
+  saveAppState(appState);
 }
 
 function replies(a) {
@@ -191,7 +201,7 @@ function retweet(a) {
   currTweet[0].isRetweeted = true;
   const whyYouShare = prompt("Why you share ?");
   let obj = {
-    id: id++,
+    id: appState.id++,
     username: "anonymous",
     content: `${whyYouShare} ` + currTweet[0].content,
     hashtags: [],
@@ -230,3 +240,5 @@ function searchHashtag(selectedHashTag) {
 
   renderTweet(result);
 }
+
+getAPI();
