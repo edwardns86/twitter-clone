@@ -1,3 +1,7 @@
+*{
+  font-family: Lato;
+}
+
 #tweet-content {
   min-height: 130px;
   background-color: #F7F7F8;
@@ -34,7 +38,8 @@
   display: flex;
   justify-content: space-evenly;
   /* border: 1px dotted green; */
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  margin-top:40px;
 }
 .button-container button {
   width: 100%;
@@ -48,23 +53,23 @@
 }
 
 .custom-card {
-  /* border: 1px solid red; */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 5px;
+  box-shadow: 0 4px 11px 0 #e6e3ec;
+  min-height: 260px;
+  margin-top: -30px;
 }
 
 .comment-card {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   /* border: 1px solid blue; */
+
 }
 
-.username {
-    /* font-size: 30px; */
-}
 
 .fa-twitter-square {
     font-size: 40px;
-    color: #0386e3
+    color: #6336BE;
 }
 
 #currentUsername {
@@ -77,80 +82,142 @@
     background-color: #6336BE;
     color: white;
 }
-
+/* Hang */
 .bg-custom {
     background-color: #E6DEF5;
 }
-
+/* Hang */
 .title {
   color: #190049;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Sign In CSS Ed*/
-
-#get-username {
-  background-color: #E6DEF5; 
+/* Hang */
+.btn-primary {
+  background-color: #6336BE;
 }
-
-#about-woof {
-  background-color: #190049; 
+/* Hang */
+.col-lg-12{
+  background-color: white;
+  margin-top: 50px;
 }
-
-.center form {
-  margin: 0;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+/* Hang */
+.line {
+  margin-top: 30px;
 }
-
-.responsive {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    max-height: 250px;
+/* Hang */
+.total {
+  color: #6336BE;
+  margin-left: 20px;
+  font-size: 18px;
+  margin-top: 14px;
 }
-.mastfoot {
-  text-align: center;
+/* Hang */
+.line-card {
+  margin-top: 30px;  
 }
+/* Hang */
+.usernamestyle {
+  font-size: 24px;
+  margin-left: 16px;
+}
+/* Hang */
+.date {
+  font-size: 18px;
+  color: #D2D2D2;
+  margin-left: 20px;
+}
+/* Hang */
+.profile-img {
+  width: 60px;
+  height: 60px;
+}
+/* Hang */
+.total-content{
+  background-color: #E6DEF5;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
 
-
+}
+/* Hang */
+#count {
+  color: #6336BE;
+  margin-right: 20px;
+  font-size: 24px;
+  margin-top: 8px;
+}
+/* Hang */
+.content-box {
+  background-color: #F7F7F8;
+  min-height: 50px;
+  display: flex;
+  align-self: center;
+}
+/* Hang */
+.text-content {
+  margin: 20px;
+}
+/* Hang */
+.info-card {
+  display: inline-block;
+}
+/* Hang */
+.fas {
+  color:#6336BE;
+}
+/* Hang */
+.icon-text {
+  margin-left: 10px;
+  color: #6336BE;
+}
+/* Hang */
+.fa-trash-alt{
+  color: #D2D2D2;
+}
+/* Hang */
+.icon-delete-text {
+  margin-left: 10px;
+  color: #D2D2D2;
+}
+/* Hang */
+.comment-card {
+  margin-top: 40px;
+}
+/* Hang */
+.comment-content {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+/* Hang */
+.comment-username {
+  font-weight: bold; 
+}
+/* Hang */
+.date-comment {
+  color: #D2D2D2;
+  margin-left: 10px;
+}
+/* Hang */
+.comment-box {
+  background-color: #F7F7F8;
+  min-height: 30px;
   
+}
+/* Hang */
+.comment-word {
+  margin-left: 10px;
+}
+/* Hang */
+footer {
+  margin-top: 50px;
+}
+
+/* Hang */
+.main-img {
+  width: 15%;
+  height: 15%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
