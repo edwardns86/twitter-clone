@@ -251,34 +251,19 @@ function replies(a) {
     date: new Date()
   };
 
-  const retweetHTML = `   
-        <div class="comment-card">
-            <div>
-            <h1>${promtInput}</h1>
-            </div>
-            <div>
-                <p>
-                <b class="username">${currentUser}</b> commented at
-                <i>${moment(new Date()).fromNow()}</i>
-                </p>
-            </div>
-        </div>
-        
-        
+  const retweetHTML = `         
         <div class="comment-card>
             <div>
                 <p>
-                <span class="comment-username"><b class="username">${
-                  reply.user
-                }</b><span><span class="comment-word">commented</span> 
-                <i class="date-comment">${moment(reply.date).fromNow()}</i>
+                <span class="comment-username"><b class="username">
+                  ${currentUser}</b><span><span class="comment-word">commented</span> 
+                <i class="date-comment">${moment(obj.date).fromNow()}</i>
                 <div class="comment-box" >
-                <h6 class="comment-content">${reply.content}</h6>
+                <h6 class="comment-content">${promtInput}</h6>
                 </div>
                 </p>
             </div>
-        </div>
-        `;
+        </div>`;
   document.getElementById(`retweet-${a}`).innerHTML = commentHTML + retweetHTML;
   appState.tweets[index].replies.push(obj);
   testPost();
