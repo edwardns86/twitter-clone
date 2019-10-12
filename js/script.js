@@ -3,7 +3,8 @@ const getAppState = () => {
         JSON.parse(localStorage.getItem("data")) || {
             status: false,
             id: 0,
-            tweets: []
+            tweets: [],
+            loggedInUser: "null"
         }
     );
 };
@@ -55,8 +56,10 @@ function createUsername() {
   } else {
     
     appState.loggedInUser = currentUser ;
-    window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
     appState.status = true;
+    saveAppState()
+    window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
+    
     //tweetButton.disabled = false;
     document.getElementById("tweet").style.display = "block";
     renderTweet(appState.tweets);
