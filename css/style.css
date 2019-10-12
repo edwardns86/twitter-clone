@@ -210,3 +210,18 @@
 footer {
   margin-top: 50px;
 }
+
+.left-side {
+  display: flex;
+  align-self: center;
+}
+
+.left-side-img {
+  width: 15%;
+  height: 15%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

@@ -177,7 +177,7 @@ function renderTweet(tweets) {
               <i class="fas fa-comment-alt"></i><span class="icon-text">Comment</span>
               </button>
               <button class="btn" onclick="retweet(${tweet.id})">
-              <i class="fas fa-dog"></i></i><span class="icon-text">Retweet</span>
+              <i class="fas fa-dog"></i></i><span class="icon-text">Rewoof</span>
               </button>
               <button class="btn btn-delete" onclick="deleteTweet(${
                 tweet.id
