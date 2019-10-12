@@ -52,6 +52,18 @@
     margin: auto 0;
 }
 
+.delete-hover:hover > *{
+  color: red;
+  transition: 0.5s ease;
+  transform: scale(2);
+}
+
+.delete-hover:not(hover) > *{
+  /* color: blue; */
+  transition: 1s ease;
+  transform: scale(1  );
+}
+
 .custom-card {
   border: 5px;
   box-shadow: 0 4px 11px 0 #e6e3ec;
@@ -200,7 +212,8 @@
 .comment-box {
   background-color: #F7F7F8;
   min-height: 30px;
-  
+  align-items: center;
+  display: flex;
 }
 /* Hang */
 .comment-word {
@@ -220,4 +233,14 @@ footer {
   margin-right: auto;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+
+/* Khoa */
+.origin-tweet {
+  width:70%;
+  margin: 0 auto;
+  box-shadow: 0 4px 11px 0 #e6e3ec;
+  background-color: grey;
+  margin-bottom:  10px;
 }
