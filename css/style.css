@@ -50,6 +50,7 @@
 .custom-card {
   /* border: 1px solid red; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 200px;
 }
 
 .comment-card {
@@ -58,13 +59,10 @@
   /* border: 1px solid blue; */
 }
 
-.username {
-    /* font-size: 30px; */
-}
 
 .fa-twitter-square {
     font-size: 40px;
-    color: #0386e3
+    color: #6336BE;
 }
 
 #currentUsername {
@@ -85,3 +83,22 @@
 .title {
   color: #190049;
 }
+
+.btn-primary {
+  background-color: #6336BE;
+}
+
+.col-lg-12{
+  background-color: white;
+  margin-bottom: 50px;
+  box-shadow: none ;
+}
+
+.line {
+  margin-top: 30px;
+}
+
+.total {
+  color: #D2D2D2;
+}
+

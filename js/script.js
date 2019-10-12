@@ -1,11 +1,11 @@
 const getAppState = () => {
-  return (
-    JSON.parse(localStorage.getItem("data")) || {
-      status: false,
-      id: 0,
-      tweets: []
-    }
-  );
+    return (
+        JSON.parse(localStorage.getItem("data")) || {
+            status: false,
+            id: 0,
+            tweets: []
+        }
+    );
 };
 
 const maxCharacters = 140;
@@ -40,7 +40,7 @@ const testPost = async () => {
 };
 
 const saveAppState = obj => {
-  localStorage.setItem("data", JSON.stringify(obj));
+    localStorage.setItem("data", JSON.stringify(obj));
 };
 
 //localStorage.setItem("test", JSON.stringify(appState))
@@ -92,23 +92,23 @@ function isHashTag(a) {
         return `
                 <a href ="#" onclick="searchHashtag('${word}')">${word}</a>            
             `;
-      } else return word;
-    })
-    .join(" ");
-  return text;
+            } else return word;
+        })
+        .join(" ");
+    return text;
 }
 
 function tweetTooLongStyle(tweetStringTooLong) {
-  /// Not being called use if we ever get to this user story
-  let tweetTooLong = tweetStringTooLong.substring(
-    maxCharacters - 1,
-    tweetStringTooLong.length
-  );
-  return `<span style = "background-color : 'red'" > ${tweetTooLong} </span>`;
+    /// Not being called use if we ever get to this user story
+    let tweetTooLong = tweetStringTooLong.substring(
+        maxCharacters - 1,
+        tweetStringTooLong.length
+    );
+    return `<span style = "background-color : 'red'" > ${tweetTooLong} </span>`;
 }
 
 function printName(name) {
-  console.log("Hello", name);
+    console.log("Hello", name);
 }
 
 function addTweet() {
@@ -161,7 +161,7 @@ function renderTweet(tweets) {
               </div>
               <button class="btn btn-danger btn-delete" onclick="deleteTweet(${
                 tweet.id
-              })">
+                })">
                 <i class="far fa-trash-alt"></i> Delete
               </button>
             </div>
@@ -171,16 +171,16 @@ function renderTweet(tweets) {
             <div class="button-container">
               <button class="btn btn-warning like-btn" onclick="like(${
                 tweet.id
-              })">
-                <i class="far fa-thumbs-up"></i> <span id="like-${
-                  tweet.id
+                })">
+              <i class="fas fa-hotdog"></i> <span id="like-${
+                tweet.id
                 }">Like</span>
               </button>
               <button class="btn btn-success" onclick="replies(${tweet.id})">
-                <i class="far fa-comment"></i> Comment
+              <i class="fas fa-comment-alt"></i> Comment
               </button>
               <button class="btn btn-primary" onclick="retweet(${tweet.id})">
-                <i class="fas fa-retweet"></i> Retweet
+              <i class="fas fa-dog"></i></i> Retweet
               </button>
             </div>
             <div id="retweet-${tweet.id}">
@@ -188,13 +188,13 @@ function renderTweet(tweets) {
             </div>
           </div>
         `;
-    })
-    .join("");
+        })
+        .join("");
 
-  document.getElementById("board").innerHTML = tweetHTML;
-  document.getElementById("count").innerHTML = tweets.length; // number of tweets
-  appState.status = true;
-  saveAppState(appState);
+    document.getElementById("board").innerHTML = tweetHTML;
+    document.getElementById("count").innerHTML = tweets.length; // number of tweets
+    appState.status = true;
+    saveAppState(appState);
 }
 
 function replies(a) {
@@ -272,7 +272,7 @@ function searchHashtag(selectedHashTag) {
   });
   
 
-  renderTweet(result);
+    renderTweet(result);
 }
 
 getAPI();
