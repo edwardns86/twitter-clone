@@ -211,12 +211,8 @@ footer {
   margin-top: 50px;
 }
 
-.left-side {
-  display: flex;
-  align-self: center;
-}
-
-.left-side-img {
+/* Hang */
+.main-img {
   width: 15%;
   height: 15%;
   display: block;
