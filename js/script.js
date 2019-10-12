@@ -117,7 +117,7 @@ function addTweet() {
 }
 
 function renderTweet(tweets) {
-    const tweetHTML = tweets
+    const tweetHTML =tweets
         .map(tweet => {
             console.log("replies", tweet.replies);
             return `
@@ -154,7 +154,7 @@ function renderTweet(tweets) {
               </button>
             </div>
             <div id="retweet-${tweet.id}">
-            <hr class="line">
+            <hr>
             </div>
           </div>
         `;
