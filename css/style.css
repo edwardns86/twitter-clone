@@ -85,3 +85,72 @@
 .title {
   color: #190049;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Sign In CSS Ed*/
+
+#get-username {
+  background-color: #E6DEF5; 
+}
+
+#about-woof {
+  background-color: #190049; 
+}
+
+.center form {
+  margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.responsive {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 250px;
+}
+.mastfoot {
+  text-align: center;
+}
+
+
+  

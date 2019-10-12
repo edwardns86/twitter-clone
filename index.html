@@ -26,20 +26,19 @@
     <nav class="navbar navbar-light bg-custom">
       <a class="navbar-brand"><img src="img/logo.png" alt=""/></a>
       <form class="form-inline" onsubmit="event.preventDefault()">
-        <input
+        <input id="loggedInUser" 
           id="currentUsername"
           class="form-control username mr-lg-2"
           type="text"
-          placeholder="Enter Username"
+          placeholder="Hi,  "
           aria-label="Username Input Field"
-        />
+        readonly/> 
         <button
           class="btn btn-outline-success my-2 my-sm-0"
-          id="signinButton"
+          id="signOutButton"
           type="submit"
-          onclick="createUsername()"
-        >
-          Sign In
+          onclick="signOut()">
+          Sign Out
         </button>
       </form>
     </nav>

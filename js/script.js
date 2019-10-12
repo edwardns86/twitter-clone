@@ -3,6 +3,7 @@ const getAppState = () => {
     JSON.parse(localStorage.getItem("data")) || {
       status: false,
       id: 0,
+      loggedInUser: "null" ,
       tweets: []
     }
   );
@@ -42,25 +43,26 @@ const testPost = async () => {
 const saveAppState = obj => {
   localStorage.setItem("data", JSON.stringify(obj));
 };
-
 //localStorage.setItem("test", JSON.stringify(appState))
-
 document.getElementById("tweet").style.display = "none";
 
 function createUsername() {
-
-  let currentUser = document.getElementById("currentUsername").value;
+  
+  console.log("test beginning",appState)
+  let currentUser = document.getElementById("signInUsername").value;
   if (currentUser === "") {
     appState.status = false;
-    tweetButton.disabled = true;
+    //tweetButton.disabled = true; 
   } else {
+    
+    appState.loggedInUser = currentUser ;
+    window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
     appState.status = true;
-    tweetButton.disabled = false;
+    //tweetButton.disabled = false;
     document.getElementById("tweet").style.display = "block";
     renderTweet(appState.tweets);
-    console.log('run createUsername')
   }
-  console.log("checking our check input", appState);
+  console.log("did username come thorugh", appState);
 }
 
 function checkInput() {
@@ -107,9 +109,9 @@ function tweetTooLongStyle(tweetStringTooLong) {
   return `<span style = "background-color : 'red'" > ${tweetTooLong} </span>`;
 }
 
-function printName(name) {
-  console.log("Hello", name);
-}
+//function printName(name) {
+//  console.log("Hello", name);
+// }
 
 function addTweet() {
   let currentUser = document.getElementById("currentUsername").value;
