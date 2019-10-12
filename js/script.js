@@ -1,9 +1,3 @@
-const maxCharacters = 140;
-const inputField = document.getElementById("tweet-content");
-let tweetButton = document.getElementById("tweet");
-let appState;
-inputField.addEventListener("input", checkInput);
-inputField.setAttribute("maxLength", maxCharacters);
 const getAppState = () => {
   return (
     JSON.parse(localStorage.getItem("data")) || {
@@ -14,15 +8,36 @@ const getAppState = () => {
   );
 };
 
-const getAPI = async () => {
-    let url = "https://api.myjson.com/bins/11kom6";
-    let result = await fetch(url);
-    let json = await result .json();
-    let obj = await json.tweets;
+const maxCharacters = 140;
+const inputField = document.getElementById("tweet-content");
+let tweetButton = document.getElementById("tweet");
+let appState = getAppState();
+let url = "https://api.myjson.com/bins/934v2";
+inputField.addEventListener("input", checkInput);
+inputField.setAttribute("maxLength", maxCharacters);
 
-    // renderTweet(obj)
-    appState = await json;
-}
+const getAPI = async () => {
+  let result = await fetch(url);
+  let json = await result.json();
+  let obj = await json.tweets;
+  let varWait = await (obj ? true:false);
+
+  // renderTweet(obj)
+  appState.tweets = await json;
+  
+};
+
+const testPost = async () => {
+  const response = await fetch(url, {
+    method: "PUT", // or 'PUT'
+    body: JSON.stringify(appState.tweets), // data can be `string` or {object}!
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  const json = await response.json();
+  console.log("Success:", JSON.stringify(json));
+};
 
 const saveAppState = obj => {
   localStorage.setItem("data", JSON.stringify(obj));
@@ -33,6 +48,7 @@ const saveAppState = obj => {
 document.getElementById("tweet").style.display = "none";
 
 function createUsername() {
+
   let currentUser = document.getElementById("currentUsername").value;
   if (currentUser === "") {
     appState.status = false;
@@ -41,7 +57,8 @@ function createUsername() {
     appState.status = true;
     tweetButton.disabled = false;
     document.getElementById("tweet").style.display = "block";
-    renderTweet(appState.tweets)
+    renderTweet(appState.tweets);
+    console.log('run createUsername')
   }
   console.log("checking our check input", appState);
 }
@@ -51,7 +68,6 @@ function checkInput() {
   const remainChar = maxCharacters - value.length;
 
   document.getElementById("character").innerHTML = remainChar;
-  console.log("red", value.length === "");
 
   if (value.length > maxCharacters) {
     tweetButton.disabled = true;
@@ -66,7 +82,6 @@ function checkInput() {
 function isHashTag(a) {
   const index = appState.tweets.findIndex(tweet => tweet.id == a);
   const value = appState.tweets[index];
-  console.log(appState)
   const splitValue = value.content.split(" ");
 
   const text = splitValue
@@ -114,12 +129,27 @@ function addTweet() {
 
   renderTweet(appState.tweets);
   document.getElementById("tweet-content").value = "";
+  testPost();
 }
 
 function renderTweet(tweets) {
   const tweetHTML = tweets
     .map(tweet => {
-      console.log("replies", tweet.replies);
+      const tweetReplies = tweet.replies.map(reply => {
+        return `
+        <div class="comment-card">
+            <div>
+            <h1>${reply.content}</h1>
+            </div>
+            <div>
+                <p>
+                <b class="username">${reply.user}</b> commented at
+                <i>${moment(reply.date).fromNow()}</i>
+                </p>
+            </div>
+        </div>`
+      }).join("");
+      console.log(tweetReplies)
       return `
         <div class="col-lg-12 col-md-12 col-xs-12 custom-card">
             <div class="tweet-head">
@@ -154,7 +184,7 @@ function renderTweet(tweets) {
               </button>
             </div>
             <div id="retweet-${tweet.id}">
-              
+              ${tweetReplies}
             </div>
           </div>
         `;
@@ -179,7 +209,7 @@ function replies(a) {
     user: currentUser,
     date: new Date()
   };
-  console.log(getTweet);
+
   const retweetHTML = `   
         <div class="comment-card">
             <div>
@@ -194,6 +224,7 @@ function replies(a) {
         </div>`;
   document.getElementById(`retweet-${a}`).innerHTML = commentHTML + retweetHTML;
   appState.tweets[index].replies.push(obj);
+  testPost();
 }
 
 function retweet(a) {
@@ -211,32 +242,35 @@ function retweet(a) {
     parentID: currTweet[0].id,
     isRetweeted: false
   };
-  console.log("tweet Obj", obj);
+  
   appState.tweets.unshift(obj);
   renderTweet(appState.tweets);
+  testPost();
 }
 
 function like(a) {
   let index = appState.tweets.findIndex(tweet => tweet.id === a);
   const getTweet = appState.tweets[index];
   getTweet.liked = !getTweet.liked;
-  console.log(getTweet.liked);
+  
   getTweet.liked
     ? (document.getElementById(`like-${a}`).innerHTML = "Like")
     : (document.getElementById(`like-${a}`).innerHTML = "Unlike");
+  testPost();
 }
 
 function deleteTweet(a) {
   let index = appState.tweets.findIndex(tweet => tweet.id === a);
   appState.tweets.splice(index, 1);
   renderTweet(appState.tweets);
+  testPost();
 }
 
 function searchHashtag(selectedHashTag) {
   const result = appState.tweets.filter(tweet => {
     if (tweet.hashtags.includes(selectedHashTag)) return tweet;
   });
-  console.log("test ", result);
+  
 
   renderTweet(result);
 }
