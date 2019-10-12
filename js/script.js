@@ -137,14 +137,15 @@ function renderTweet(tweets) {
     .map(tweet => {
       const tweetReplies = tweet.replies.map(reply => {
         return `
-        <div class="comment-card">
-            <div>
-            <h1>${reply.content}</h1>
-            </div>
+        <hr>
+        <div class="comment-card>
             <div>
                 <p>
-                <b class="username">${reply.user}</b> commented at
-                <i>${moment(reply.date).fromNow()}</i>
+                <span class="comment-username"><b class="username">${reply.user}</b><span><span class="comment-word">commented</span> 
+                <i class="date-comment">${moment(reply.date).fromNow()}</i>
+                <div class="comment-box" >
+                <h6 class="comment-content">${reply.content}</h6>
+                </div>
                 </p>
             </div>
         </div>`
@@ -154,33 +155,34 @@ function renderTweet(tweets) {
         <div class="col-lg-12 col-md-12 col-xs-12 custom-card">
             <div class="tweet-head">
               <div>
-                <p>
-                  <b class="username">${tweet.username}</b> created at
-                  <i>${moment(tweet.date).fromNow()}</i>
+                <p class="info-card">
+                <img class="profile-img" src="img/profile.png" alt=""/>
+                  <b class="username usernamestyle">${tweet.username}</b> 
+                  <i class="date">${moment(tweet.date).fromNow()}</i>
                 </p>
               </div>
-              <button class="btn btn-danger btn-delete" onclick="deleteTweet(${
-                tweet.id
-                })">
-                <i class="far fa-trash-alt"></i> Delete
-              </button>
             </div>
-            <div>
-              <h1>${isHashTag(tweet.id)}</h1>
+            <div class="content-box">
+              <p class="text-content">${isHashTag(tweet.id)}</p>
             </div>
             <div class="button-container">
-              <button class="btn btn-warning like-btn" onclick="like(${
+              <button class="btn like-btn" onclick="like(${
                 tweet.id
                 })">
-              <i class="fas fa-hotdog"></i> <span id="like-${
+              <i class="fas fa-hotdog"></i> <span class="icon-text" id="like-${
                 tweet.id
                 }">Like</span>
               </button>
-              <button class="btn btn-success" onclick="replies(${tweet.id})">
-              <i class="fas fa-comment-alt"></i> Comment
+              <button class="btn" onclick="replies(${tweet.id})">
+              <i class="fas fa-comment-alt"></i><span class="icon-text">Comment</span>
               </button>
-              <button class="btn btn-primary" onclick="retweet(${tweet.id})">
-              <i class="fas fa-dog"></i></i> Retweet
+              <button class="btn" onclick="retweet(${tweet.id})">
+              <i class="fas fa-dog"></i></i><span class="icon-text">Retweet</span>
+              </button>
+              <button class="btn btn-delete" onclick="deleteTweet(${
+                tweet.id
+                })">
+                <i class="far fa-trash-alt"></i><span class="icon-delete-text">Delete</span>
               </button>
             </div>
             <div id="retweet-${tweet.id}">
