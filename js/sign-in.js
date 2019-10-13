@@ -7,9 +7,7 @@ signInUsername.addEventListener('input', () => {
     }
 });
 
-
   function logIn () {
-   
    let loginUser = document.getElementById("signInUsername").value
    let myObj = {
     currentWoofer: loginUser ,
@@ -22,6 +20,14 @@ signInUsername.addEventListener('input', () => {
   
 
 let myObj_deserialized = JSON.parse(localStorage.getItem("myObj"));
+
+
+function signOut () {
+
+
+}
+
+
 
 
 //  const getAppState = () => {
@@ -62,3 +68,5 @@ let myObj_deserialized = JSON.parse(localStorage.getItem("myObj"));
 //     }
 //     console.log("did username come thorugh", appState);
 //   }
+
+

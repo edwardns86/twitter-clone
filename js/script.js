@@ -55,10 +55,8 @@ function createUsername() {
     
     appState.loggedInUser = currentUser ;
     appState.status = true;
-    saveAppState()
-    //window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
-    
     tweetButton.disabled = false;
+    saveAppState()
     document.getElementById("tweet").style.display = "block";
     renderTweet(appState.tweets);
     console.log("run createUsername");
