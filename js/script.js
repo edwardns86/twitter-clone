@@ -325,7 +325,8 @@ function searchHashtag(selectedHashTag) {
 
 const signOut = () => {
   appState.status = false;
-  window.open("signinpage.html");
+  appState.loggedInUser = "";
+  window.open("index.html");
   saveAppState(appState)
 }
 

@@ -16,7 +16,7 @@ function logIn() {
   };
   let myObj_serialized = JSON.stringify(myObj);
   localStorage.setItem("data", myObj_serialized);
-  window.open("index.html");
+  window.open("board.html");
 }
 
 let myObj_deserialized = JSON.parse(localStorage.getItem("myObj"));
