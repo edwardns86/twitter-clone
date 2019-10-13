@@ -1,37 +1,47 @@
 const getAppState = () => {
-    return (
-        JSON.parse(localStorage.getItem("myObj") ,
-        JSON.parse(localStorage.getItem("data")) || {
-            status: false,
-            id: 0,
-            tweets: [],
-            loggedInUser: "null"
-        }
-    ));
+  return (
+    JSON.parse(localStorage.getItem("data")) || {
+      status: false,
+      id: 0,
+      tweets: [],
+      loggedInUser: "null"
+    }
+  );
 };
 
 const maxCharacters = 140;
 const inputField = document.getElementById("tweet-content");
 let tweetButton = document.getElementById("tweet");
 let appState = getAppState();
-let url = "https://api.myjson.com/bins/934v2";
+let url = "https://api.myjson.com/bins/aejni";
 inputField.addEventListener("input", checkInput);
 inputField.setAttribute("maxLength", maxCharacters);
 
 const getAPI = async () => {
+  tweetButton.disabled = false;
+  document.getElementById("tweet").style.display = "block";
+  document.getElementById('login-user-navbar').innerText = appState.loggedInUser;
+
   let result = await fetch(url);
   let json = await result.json();
   let obj = await json.tweets;
-  let varWait = await (obj ? true : false);
-
+  let idAPI = await json.id;
   // renderTweet(obj)
-  appState.tweets = await json;
+  if(obj == undefined) obj = [];
+  if(idAPI == undefined) idAPI =0;
+  appState.tweets = await obj;
+  appState.id = await idAPI;
+
+  renderTweet(appState.tweets);
 };
 
 const testPost = async () => {
+  const obj = new Object();
+  obj.id = appState.id;
+  obj.tweets = appState.tweets;
   const response = await fetch(url, {
     method: "PUT", // or 'PUT'
-    body: JSON.stringify(appState.tweets), // data can be `string` or {object}!
+    body: JSON.stringify(obj), // data can be `string` or {object}!
     headers: {
       "Content-Type": "application/json"
     }
@@ -41,29 +51,17 @@ const testPost = async () => {
 };
 
 const saveAppState = obj => {
-    localStorage.setItem("data", JSON.stringify(obj));
+  localStorage.setItem("data", JSON.stringify(obj));
 };
 //localStorage.setItem("test", JSON.stringify(appState))
 document.getElementById("tweet").style.display = "none";
 
 function createUsername() {
-  let currentUser = document.getElementById("currentUsername").value;
-  if (currentUser === "") {
-    appState.status = false;
-    tweetButton.disabled = true; 
-  } else {
-    
-    appState.loggedInUser = currentUser ;
-    appState.status = true;
-    saveAppState()
-    //window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
-    
-    tweetButton.disabled = false;
-    document.getElementById("tweet").style.display = "block";
-    renderTweet(appState.tweets);
-    console.log("run createUsername");
-  }
-  console.log("did username come thorugh", appState);
+  // saveAppState()
+  //window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
+
+  renderTweet(appState.tweets);
+  console.log("run createUsername");
 }
 
 function checkInput() {
@@ -85,7 +83,7 @@ function checkInput() {
 function isHashTag(a) {
   const index = appState.tweets.findIndex(tweet => tweet.id == a);
   const value = appState.tweets[index];
-  console.log(value)
+
   const splitValue = value.content.split(" ");
 
   const text = splitValue
@@ -96,32 +94,35 @@ function isHashTag(a) {
         return `
                 <a href ="#" onclick="searchHashtag('${word}')">${word}</a>            
             `;
-            } else return word;
-        })
-        .join(" ");
-    return text;
+      } else return word;
+    })
+    .join(" ");
+  return text;
 }
 
 function tweetTooLongStyle(tweetStringTooLong) {
-    /// Not being called use if we ever get to this user story
-    let tweetTooLong = tweetStringTooLong.substring(
-        maxCharacters - 1,
-        tweetStringTooLong.length
-    );
-    return `<span style = "background-color : 'red'" > ${tweetTooLong} </span>`;
+  /// Not being called use if we ever get to this user story
+  let tweetTooLong = tweetStringTooLong.substring(
+    maxCharacters - 1,
+    tweetStringTooLong.length
+  );
+  return `<span style = "background-color : 'red'" > ${tweetTooLong} </span>`;
 }
 
 function printName(name) {
-    console.log("Hello", name);
+  console.log("Hello", name);
 }
 
 function addTweet() {
-  let currentUser = document.getElementById("currentUsername").value;
+  let idTweet;
   let tweetcontent = document.getElementById("tweet-content").innerText;
+  if (appState.id == null) {
+    idTweet = 0;
+  }
   if (tweetcontent === "") return;
   let obj = {
     id: appState.id++,
-    username: currentUser,
+    username: appState.loggedInUser,
     content: tweetcontent,
     hashtags: [],
     date: new Date(),
@@ -129,10 +130,11 @@ function addTweet() {
     replies: [],
     isRetweeted: false
   };
+  console.log(obj)
   appState.tweets.unshift(obj);
 
   renderTweet(appState.tweets);
-  document.getElementById("tweet-content").value = "";
+  document.getElementById("tweet-content").innerText = "";
   testPost();
 }
 
@@ -143,12 +145,10 @@ function renderTweet(tweets) {
       const parentID = tweet.parentID;
       if (parentID != null && parentID != undefined) {
         let originalTweet = tweets.filter(tweet => tweet.id === parentID);
-        console.log(originalTweet)
-        console.log(originalTweet.length === 0)
-
         if (originalTweet.length > 0) {
           orignalTweetHTML = originalTweet
             .map(original => {
+              console.log("original",original)
               return `
                   <div class="tweet-head">
                       <div>
@@ -170,13 +170,14 @@ function renderTweet(tweets) {
             .join("");
         } else {
           orignalTweetHTML = `
-          <div style="text-align: center"><h1>Post was deleted</h1></div>
+          <div style="text-align: center"><h1 stype="padding:10px">Post was deleted</h1></div>
           `;
         }
       }
 
       const tweetReplies = tweet.replies
         .map(reply => {
+          console.log(reply)
           return `
         <div class="comment-card">
             <div>
@@ -207,6 +208,9 @@ function renderTweet(tweets) {
             <div class="content-box">
               <p class="text-content">${isHashTag(tweet.id)}</p>
             </div>
+            <div class="origin-tweet" id="original-${tweet.id}">
+              ${orignalTweetHTML}
+            </div>
             <div class="button-container">
               <button class="btn like-btn" onclick="like(${tweet.id})">
               <i class="fas fa-hotdog"></i> <span class="icon-text" id="like-${
@@ -225,16 +229,13 @@ function renderTweet(tweets) {
                 <i class="far fa-trash-alt"></i><span class="icon-delete-text">Delete</span>
               </button>
             </div>
-            <div class="origin-tweet" id="original-${tweet.id}">
-              ${orignalTweetHTML}
-            </div>
             <div id="retweet-${tweet.id}">
               ${tweetReplies}
             </div>
           </div>
         `;
-        })
-        .join("");
+    })
+    .join("");
 
   document.getElementById("board").innerHTML = tweetHTML;
   document.getElementById("count").innerHTML = tweets.length; // number of tweets
@@ -252,7 +253,7 @@ function replies(a) {
   const commentHTML = document.getElementById(`retweet-${a}`).innerHTML;
   const obj = {
     content: promtInput,
-    user: currentUser,
+    user: appState.loggedInUser,
     date: new Date()
   };
 
@@ -261,7 +262,7 @@ function replies(a) {
             <div>
                 <p>
                 <span class="comment-username"><b class="username">
-                  ${currentUser}</b><span><span class="comment-word">commented</span> 
+                  ${appState.loggedInUser}</b><span><span class="comment-word">commented</span> 
                 <i class="date-comment">${moment(obj.date).fromNow()}</i>
                 <div class="comment-box" >
                 <h6 class="comment-content">${promtInput}</h6>
@@ -281,8 +282,8 @@ function retweet(a) {
   const whyYouShare = prompt("Why you share ?");
   let obj = {
     id: appState.id++,
-    username: `${inputField.value}`,
-    content: `${whyYouShare} ` + currTweet[0].content,
+    username: `${appState.loggedInUser}`,
+    content: `${whyYouShare} `,
     hashtags: [],
     date: new Date(),
     liked: false,
@@ -304,7 +305,6 @@ function like(a) {
   !getTweet.liked
     ? (document.getElementById(`like-${a}`).innerHTML = "Like")
     : (document.getElementById(`like-${a}`).innerHTML = "Unlike");
-  console.log("like appstate", appState.tweets[index]);
   testPost();
 }
 
@@ -320,8 +320,17 @@ function searchHashtag(selectedHashTag) {
     if (tweet.hashtags.includes(selectedHashTag)) return tweet;
   });
 
-    renderTweet(result);
+  renderTweet(result);
 }
 
-getAPI();
+const signOut = () => {
+  appState.status = false;
+  window.open("signinpage.html");
+  saveAppState(appState)
+}
 
+if (appState.status == true) {
+  getAPI();
+} else {
+  document.getElementById("board").innerHTML = "<h1>Please login first</h1>";
+}
