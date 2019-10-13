@@ -19,7 +19,7 @@ function logIn() {
   window.open("board.html");
 }
 
-let myObj_deserialized = JSON.parse(localStorage.getItem("myObj"));
+let myObj_deserialized = JSON.parse(localStorage.getItem("data"));
 
 //  const getAppState = () => {
 //     return (
@@ -59,3 +59,9 @@ let myObj_deserialized = JSON.parse(localStorage.getItem("myObj"));
 //     }
 //     console.log("did username come thorugh", appState);
 //   }
+
+
+if(myObj_deserialized != null) {
+  console.log('run')
+  if(myObj_deserialized.loggedInUser != "") window.open("board.html", "_self")
+}
