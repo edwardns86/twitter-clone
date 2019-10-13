@@ -241,6 +241,6 @@ footer {
   width:70%;
   margin: 0 auto;
   box-shadow: 0 4px 11px 0 #e6e3ec;
-  background-color: grey;
+  /* background-color: grey; */
   margin-bottom:  10px;
 }
