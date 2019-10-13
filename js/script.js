@@ -14,21 +14,21 @@ const inputField = document.getElementById("tweet-content");
 let tweetButton = document.getElementById("tweet");
 let appState = getAppState();
 let url = "https://api.myjson.com/bins/aejni";
-inputField.addEventListener("input", checkInput);
-inputField.setAttribute("maxLength", maxCharacters);
+inputField.addEventListener("input", e => checkInput(e), false);
 
 const getAPI = async () => {
   tweetButton.disabled = false;
   document.getElementById("tweet").style.display = "block";
-  document.getElementById('login-user-navbar').innerText = appState.loggedInUser;
+  document.getElementById("login-user-navbar").innerText =
+    appState.loggedInUser;
 
   let result = await fetch(url);
   let json = await result.json();
   let obj = await json.tweets;
   let idAPI = await json.id;
   // renderTweet(obj)
-  if(obj == undefined) obj = [];
-  if(idAPI == undefined) idAPI =0;
+  if (obj == undefined) obj = [];
+  if (idAPI == undefined) idAPI = 0;
   appState.tweets = await obj;
   appState.id = await idAPI;
 
@@ -64,16 +64,20 @@ function createUsername() {
   console.log("run createUsername");
 }
 
-function checkInput() {
+function checkInput(e) {
   const value = inputField.innerText;
   const remainChar = maxCharacters - value.length;
 
-  document.getElementById("character").innerHTML = remainChar;
+  document.getElementById("character").innerHTML =
+    remainChar + " character left";
 
   if (value.length > maxCharacters) {
     tweetButton.disabled = true;
     document.getElementById("character").style.color = "red";
-    //  document.getElementById('tweet-content').value = tweetTooLongStyle(value)
+    document.getElementById("tweet-content").innerHTML = tweetTooLongStyle(
+      value
+    );
+    setEndOfContenteditable(e.target);
   } else {
     document.getElementById("character").style.color = "black";
     tweetButton.disabled = false;
@@ -101,12 +105,14 @@ function isHashTag(a) {
 }
 
 function tweetTooLongStyle(tweetStringTooLong) {
-  /// Not being called use if we ever get to this user story
-  let tweetTooLong = tweetStringTooLong.substring(
-    maxCharacters - 1,
+  let overCharacters = tweetStringTooLong.substring(
+    140,
     tweetStringTooLong.length
   );
-  return `<span style = "background-color : 'red'" > ${tweetTooLong} </span>`;
+  overCharacters = `<span style="background-color: red">${overCharacters}</span>`;
+  let editCharacters = tweetStringTooLong.slice(0, 140);
+
+  return editCharacters.concat(overCharacters);
 }
 
 function printName(name) {
@@ -130,7 +136,7 @@ function addTweet() {
     replies: [],
     isRetweeted: false
   };
-  console.log(obj)
+  console.log(obj);
   appState.tweets.unshift(obj);
 
   renderTweet(appState.tweets);
@@ -148,7 +154,7 @@ function renderTweet(tweets) {
         if (originalTweet.length > 0) {
           orignalTweetHTML = originalTweet
             .map(original => {
-              console.log("original",original)
+              console.log("original", original);
               return `
                   <div class="tweet-head">
                       <div>
@@ -177,7 +183,7 @@ function renderTweet(tweets) {
 
       const tweetReplies = tweet.replies
         .map(reply => {
-          console.log(reply)
+          console.log(reply);
           return `
         <div class="comment-card">
             <div>
@@ -242,6 +248,8 @@ function renderTweet(tweets) {
   appState.status = true;
   saveAppState(appState);
   orignalTweetHTML = "";
+  document.getElementById("character").innerHTML =
+    maxCharacters + " character left";
 }
 
 function replies(a) {
@@ -262,7 +270,9 @@ function replies(a) {
             <div>
                 <p>
                 <span class="comment-username"><b class="username">
-                  ${appState.loggedInUser}</b><span><span class="comment-word">commented</span> 
+                  ${
+                    appState.loggedInUser
+                  }</b><span><span class="comment-word">commented</span> 
                 <i class="date-comment">${moment(obj.date).fromNow()}</i>
                 <div class="comment-box" >
                 <h6 class="comment-content">${promtInput}</h6>
@@ -327,11 +337,30 @@ const signOut = () => {
   appState.status = false;
   appState.loggedInUser = "";
   window.open("index.html");
-  saveAppState(appState)
-}
+  saveAppState(appState);
+};
 
 if (appState.status == true) {
   getAPI();
 } else {
   document.getElementById("board").innerHTML = "<h1>Please login first</h1>";
+}
+
+function setEndOfContenteditable(contentEditableElement) {
+  var range, selection;
+  if (document.createRange) {
+    //Firefox, Chrome, Opera, Safari, IE 9+
+    range = document.createRange(); //Create a range (a range is a like the selection but invisible)
+    range.selectNodeContents(contentEditableElement); //Select the entire contents of the element with the range
+    range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+    selection = window.getSelection(); //get the selection object (allows you to change selection)
+    selection.removeAllRanges(); //remove any selections already made
+    selection.addRange(range); //make the range you have just created the visible selection
+  } else if (document.selection) {
+    //IE 8 and lower
+    range = document.body.createTextRange(); //Create a range (a range is a like the selection but invisible)
+    range.moveToElementText(contentEditableElement); //Select the entire contents of the element with the range
+    range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+    range.select(); //Select the range (make it the visible selection
+  }
 }
