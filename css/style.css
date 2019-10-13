@@ -127,7 +127,7 @@
 /* Hang */
 .usernamestyle {
   font-size: 24px;
-  margin-left: 16px;
+  margin-left: 20px;
 }
 /* Hang */
 .date {
@@ -289,6 +289,22 @@ footer {
 }
 
 #signout-button {
-  height: 40%;
   margin: 20px;
+}
+
+.nav-profile-img {
+  width: 40px;
+  height: 40px;
+  margin-left: 100px;
+  margin-bottom: 21px;
+}
+
+#login-user-navbar {
+  margin-bottom: 27px;
+  font-size: 18px;
+}
+
+.signout-btn {
+  background-color: #6336be;
+  color: white; 
 }
