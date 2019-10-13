@@ -1,12 +1,13 @@
 const getAppState = () => {
     return (
+        JSON.parse(localStorage.getItem("myObj") ,
         JSON.parse(localStorage.getItem("data")) || {
             status: false,
             id: 0,
             tweets: [],
             loggedInUser: "null"
         }
-    );
+    ));
 };
 
 const maxCharacters = 140;
@@ -49,15 +50,15 @@ function createUsername() {
   let currentUser = document.getElementById("currentUsername").value;
   if (currentUser === "") {
     appState.status = false;
-    //tweetButton.disabled = true; 
+    tweetButton.disabled = true; 
   } else {
     
     appState.loggedInUser = currentUser ;
     appState.status = true;
     saveAppState()
-    window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
+    //window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
     
-    //tweetButton.disabled = false;
+    tweetButton.disabled = false;
     document.getElementById("tweet").style.display = "block";
     renderTweet(appState.tweets);
     console.log("run createUsername");
@@ -323,3 +324,4 @@ function searchHashtag(selectedHashTag) {
 }
 
 getAPI();
+

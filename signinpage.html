@@ -37,7 +37,7 @@
         <div class="row">
             <div id="get-username" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 min-vh-100">
                 <div id="signinform" class="container center">
-                    <form class="form-group form-control-lg">
+                    <form id="loginForm" class="form-group form-control-lg">
                         <img class="form-group" src="img/logo.png" alt="logo">
                         <h2 class="form-group">See what's happening in your world right now!</h2>
                         <input id="signInUsername" class="form-control form-group username mr-lg-2" type="text"
@@ -45,7 +45,7 @@
                         <input id="currentPassword" class="form-control form-group password mr-lg-2" type="text"
                             placeholder="********" aria-label="Username Password Dummy" readonly>
                         <button class="btn form-group btn-outline-success my-2 my-sm-0" id="signinButton" type="submit"
-                        onclick="createUsername()" > Sign In
+                        onclick="logIn()" disabled="disabled"> Log In
                         </button>
                     </form>
                 </div>
