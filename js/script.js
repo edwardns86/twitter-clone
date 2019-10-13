@@ -1,11 +1,13 @@
 const getAppState = () => {
-  return (
-    JSON.parse(localStorage.getItem("data")) || {
-      status: false,
-      id: 0,
-      tweets: []
-    }
-  );
+    return (
+        JSON.parse(localStorage.getItem("myObj") ,
+        JSON.parse(localStorage.getItem("data")) || {
+            status: false,
+            id: 0,
+            tweets: [],
+            loggedInUser: "null"
+        }
+    ));
 };
 
 const maxCharacters = 140;
@@ -39,26 +41,29 @@ const testPost = async () => {
 };
 
 const saveAppState = obj => {
-  localStorage.setItem("data", JSON.stringify(obj));
+    localStorage.setItem("data", JSON.stringify(obj));
 };
-
 //localStorage.setItem("test", JSON.stringify(appState))
-
 document.getElementById("tweet").style.display = "none";
 
 function createUsername() {
   let currentUser = document.getElementById("currentUsername").value;
   if (currentUser === "") {
     appState.status = false;
-    tweetButton.disabled = true;
+    tweetButton.disabled = true; 
   } else {
+    
+    appState.loggedInUser = currentUser ;
     appState.status = true;
+    saveAppState()
+    //window.open("index.html"); // ED -- Adding window open so that on click sign in page takes you to the index.html
+    
     tweetButton.disabled = false;
     document.getElementById("tweet").style.display = "block";
     renderTweet(appState.tweets);
     console.log("run createUsername");
   }
-  console.log("checking our check input", appState);
+  console.log("did username come thorugh", appState);
 }
 
 function checkInput() {
@@ -91,23 +96,23 @@ function isHashTag(a) {
         return `
                 <a href ="#" onclick="searchHashtag('${word}')">${word}</a>            
             `;
-      } else return word;
-    })
-    .join(" ");
-  return text;
+            } else return word;
+        })
+        .join(" ");
+    return text;
 }
 
 function tweetTooLongStyle(tweetStringTooLong) {
-  /// Not being called use if we ever get to this user story
-  let tweetTooLong = tweetStringTooLong.substring(
-    maxCharacters - 1,
-    tweetStringTooLong.length
-  );
-  return `<span style = "background-color : 'red'" > ${tweetTooLong} </span>`;
+    /// Not being called use if we ever get to this user story
+    let tweetTooLong = tweetStringTooLong.substring(
+        maxCharacters - 1,
+        tweetStringTooLong.length
+    );
+    return `<span style = "background-color : 'red'" > ${tweetTooLong} </span>`;
 }
 
 function printName(name) {
-  console.log("Hello", name);
+    console.log("Hello", name);
 }
 
 function addTweet() {
@@ -228,8 +233,8 @@ function renderTweet(tweets) {
             </div>
           </div>
         `;
-    })
-    .join("");
+        })
+        .join("");
 
   document.getElementById("board").innerHTML = tweetHTML;
   document.getElementById("count").innerHTML = tweets.length; // number of tweets
@@ -315,7 +320,8 @@ function searchHashtag(selectedHashTag) {
     if (tweet.hashtags.includes(selectedHashTag)) return tweet;
   });
 
-  renderTweet(result);
+    renderTweet(result);
 }
 
 getAPI();
+

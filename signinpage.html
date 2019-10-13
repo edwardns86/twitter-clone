@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://kit.fontawesome.com/66444ff849.js" crossorigin="anonymous"></script>
+    <title>Woof Social Sign In</title>
+</head>
+
+<body>
+    <!-- <nav class="navbar navbar-light bg-custom"> 
+    <a class="navbar-brand"><img src="img/logo.png" alt=""></a>
+    <form class="form-inline" onsubmit="event.preventDefault()">
+      <input
+        id="currentUsername"
+        class="form-control username mr-lg-2"
+        type="text"
+        placeholder="Enter Username"
+        aria-label="Username Input Field"
+      />
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        id="signinButton"
+        type="submit"
+        onclick="createUsername()"
+      > Sign In
+      </button>
+    </form>
+  </nav> -->
+    <div class="container-fluid">
+        <div class="row">
+            <div id="get-username" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 min-vh-100">
+                <div id="signinform" class="container center">
+                    <form id="loginForm" class="form-group form-control-lg">
+                        <img class="form-group" src="img/logo.png" alt="logo">
+                        <h2 class="form-group">See what's happening in your world right now!</h2>
+                        <input id="signInUsername" class="form-control form-group username mr-lg-2" type="text"
+                            placeholder="Enter Username" aria-label="Username Input Field">
+                        <input id="currentPassword" class="form-control form-group password mr-lg-2" type="text"
+                            placeholder="********" aria-label="Username Password Dummy" readonly>
+                        <button class="btn form-group btn-outline-success my-2 my-sm-0" id="signinButton" type="submit"
+                        onclick="logIn()" disabled="disabled"> Log In
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div id="about-woof" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                <img class="responsive align-items-center" src="img/connect image.svg">
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <p> This is a 🐶's life production from <a href="https://github.com/https://github.com/nakasaky55 ">Khoa</a>, <a href="https://github.com/hang-yoko-tran">Hang</a> and <a href="https://github.com/edwarns86">Ed</a></p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+    <script src="js/sign-in.js"></script>
+</body>
+
+</html>
