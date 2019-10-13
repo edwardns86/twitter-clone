@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://kit.fontawesome.com/66444ff849.js" crossorigin="anonymous"></script>
     <title>Document</title>
@@ -31,116 +34,138 @@
         <div></div>
     </section>
     <div>
-        <img class="main-img" src="img/1.png">
+      <img class="main-img" src="img/1.png" />
     </div>
     <section class="final container">
-        <div id="tweet-contain">
-            <h5 class="title">What do you want to woof?</h5>
-            <input type="text" id="tweet-content" class="form-control" />
-            <div id="below-input">
-                <div id="character"></div>
-                <button class="btn btn-primary custom-btn" id="tweet" onclick="addTweet()">
-                    WOOF
-                </button>
-            </div>
-            <hr>
-            <div class="total-content">
-                <h5 class="total">Total Woofs</h5>
-                <div id="count"></div>
-            </div>
-            <hr>
-            <div class="row" id="board">
-            </div>
+      <div id="tweet-contain">
+        <h5 class="title">What do you want to woof?</h5>
+        <input type="text" id="tweet-content" class="form-control" />
+        <div id="below-input">
+          <div id="character"></div>
+          <button
+            class="btn btn-primary custom-btn"
+            id="tweet"
+            onclick="addTweet()"
+          >
+            WOOF
+          </button>
         </div>
+        <hr />
+        <div class="total-content">
+          <h5 class="total">Total Woofs</h5>
+          <div id="count"></div>
+        </div>
+        <hr />
+        <div class="row" id="board"></div>
+      </div>
     </section>
     <section></section>
     <footer>
-        <footer class="page-footer font-small unique-color-dark">
-
-            <div style="background-color: #6336BE;">
-                <div class="container">
-                    <div class="row py-4 d-flex align-items-center">
-                        <div style="color: white" class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                            <h6 class="mb-0">Get connected with your friends!</h6>
-                        </div>
-                        <div class="col-md-6 col-lg-7 text-center text-md-right">
-
-                            <!-- Facebook -->
-                            <a style="color: white" class=" fb-ic">
-                                <i class="fab fa-facebook-f white-text mr-4"> </i>
-                            </a>
-                            <!-- Twitter -->
-                            <a style="color: white" class=" tw-ic">
-                                <i class="fab fa-twitter white-text mr-4"> </i>
-                            </a>
-                            <!-- Google +-->
-                            <a style="color: white" class=" gplus-ic">
-                                <i class="fab fa-google-plus-g white-text mr-4"> </i>
-                            </a>
-                            <!--Linkedin -->
-                            <a style="color: white" class=" li-ic">
-                                <i class="fab fa-linkedin-in white-text mr-4"> </i>
-                            </a>
-                            <!--Instagram-->
-                            <a style="color: white" class=" ins-ic">
-                                <i class="fab fa-instagram white-text"> </i>
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
+      <footer class="page-footer font-small unique-color-dark">
+        <div style="background-color: #6336BE;">
+          <div class="container">
+            <div class="row py-4 d-flex align-items-center">
+              <div
+                style="color: white"
+                class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0"
+              >
+                <h6 class="mb-0">Get connected with your friends!</h6>
+              </div>
+              <div class="col-md-6 col-lg-7 text-center text-md-right">
+                <!-- Facebook -->
+                <a style="color: white" class=" fb-ic">
+                  <i class="fab fa-facebook-f white-text mr-4"> </i>
+                </a>
+                <!-- Twitter -->
+                <a style="color: white" class=" tw-ic">
+                  <i class="fab fa-twitter white-text mr-4"> </i>
+                </a>
+                <!-- Google +-->
+                <a style="color: white" class=" gplus-ic">
+                  <i class="fab fa-google-plus-g white-text mr-4"> </i>
+                </a>
+                <!--Linkedin -->
+                <a style="color: white" class=" li-ic">
+                  <i class="fab fa-linkedin-in white-text mr-4"> </i>
+                </a>
+                <!--Instagram-->
+                <a style="color: white" class=" ins-ic">
+                  <i class="fab fa-instagram white-text"> </i>
+                </a>
+              </div>
             </div>
-            <div class="container text-center text-md-left mt-5">
-                <div class="row mt-3">
-                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                        <h6 class="text-uppercase font-weight-bold">WOOF</h6>
-                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>Donec ut euismod nulla, eget commodo sapien. Quisque vitae enim sed nibh sodales pellentesque
-                            nec non magna. </p>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase font-weight-bold">Products</h6>
-                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>
-                            <a href="#!">Luctus Metus</a>
-                        </p>
-                        <p>
-                            <a href="#!">Interdum Ipsum</a>
-                        </p>
-                        <p>
-                            <a href="#!">Porttitor Mauris</a>
-                        </p>
-                        <p>
-                            <a href="#!">Imperdiet Ornare</a>
-                        </p>
-                    </div>
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                        <h6 class="text-uppercase font-weight-bold">Useful links</h6>
-                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>
-                            <a href="#!">Your Account</a>
-                        </p>
-                        <p>
-                            <a href="#!"> Woof Expert</a>
-                        </p>
-                        <p>
-                            <a href="#!">Blogs</a>
-                        </p>
-                        <p>
-                            <a href="#!">Help</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                        <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                        <p>
-                            <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                        <p>
-                            <i class="fas fa-envelope mr-3"></i> info@woof.com</p>
-                        <p>
-                            <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                        <p>
-                            <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          </div>
+        </div>
+        <div class="container text-center text-md-left mt-5">
+          <div class="row mt-3">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <h6 class="text-uppercase font-weight-bold">WOOF</h6>
+              <hr
+                class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px;"
+              />
+              <p>
+                Donec ut euismod nulla, eget commodo sapien. Quisque vitae enim
+                sed nibh sodales pellentesque nec non magna.
+              </p>
+            </div>
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase font-weight-bold">Products</h6>
+              <hr
+                class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px;"
+              />
+              <p>
+                <a href="#!"> </a>
+              </p>
+              <p>
+                <a href="#!">Interdum Ipsum</a>
+              </p>
+              <p>
+                <a href="#!">Porttitor Mauris</a>
+              </p>
+              <p>
+                <a href="#!">Imperdiet Ornare</a>
+              </p>
+            </div>
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+              <hr
+                class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px;"
+              />
+              <p>
+                <a href="#!">Your Account</a>
+              </p>
+              <p>
+                <a href="#!"> Woof Expert</a>
+              </p>
+              <p>
+                <a href="#!">Blogs</a>
+              </p>
+              <p>
+                <a href="#!">Help</a>
+              </p>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <h6 class="text-uppercase font-weight-bold">Contact</h6>
+              <hr
+                class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+                style="width: 60px;"
+              />
+              <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+              <p><i class="fas fa-envelope mr-3"></i> info@woof.com</p>
+              <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+              <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright text-center py-3">
+          © 2018 Copyright:
+          <a href="https://mdbootstrap.com/education/bootstrap/"> woof.com</a>
+        </div>
+      </footer>
+    </footer>
 
                     </div>
                 </div>

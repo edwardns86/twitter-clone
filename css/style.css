@@ -52,6 +52,18 @@
     margin: auto 0;
 }
 
+.delete-hover:hover > *{
+  color: red;
+  transition: 0.5s ease;
+  transform: scale(2);
+}
+
+.delete-hover:not(hover) > *{
+  /* color: blue; */
+  transition: 1s ease;
+  transform: scale(1  );
+}
+
 .custom-card {
   border: 5px;
   box-shadow: 0 4px 11px 0 #e6e3ec;
@@ -200,7 +212,8 @@
 .comment-box {
   background-color: #F7F7F8;
   min-height: 30px;
-  
+  align-items: center;
+  display: flex;
 }
 /* Hang */
 .comment-word {
@@ -223,34 +236,11 @@ footer {
 }
 
 
-/* Sign In CSS Ed*/
-
-#get-username {
-  background-color: #E6DEF5; 
-  }
-  
-  #about-woof {
-    background-color: red;
-  }
-  
-  .center form {
-  margin: 0;
-  position: absolute;
-  top: 30%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-  
-  .responsive {
-  display: block;
-  margin-left: auto;
- margin-right: auto;
-  position: relative;
-  top: 50%;
-      transform: translateY(-50%);
-      max-height: 250px;
-  }
-  .mastfoot {
-  text-align: center;
-  }  
+/* Khoa */
+.origin-tweet {
+  width:70%;
+  margin: 0 auto;
+  box-shadow: 0 4px 11px 0 #e6e3ec;
+  background-color: grey;
+  margin-bottom:  10px;
+}
