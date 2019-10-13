@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link
-      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap"
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="https://kit.fontawesome.com/66444ff849.js" crossorigin="anonymous"></script>
-    <title>Document</title>
-</head>
 
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/66444ff849.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+
+  <body>
     <nav class="navbar navbar-light bg-custom">
-        <a class="navbar-brand"><img src="img/logo.png" alt="" /></a>
-        <form class="form-inline" onsubmit="event.preventDefault()">
-            <input id="currentUsername" class="form-control username mr-lg-2" type="text" placeholder="Enter Username"
-                aria-label="Username Input Field" />
-            <button class="btn btn-outline-success my-2 my-sm-0"  type="submit"
-                onclick="createUsername()">
-                Sign In
-            </button>
-        </form>
+      <a class="navbar-brand"><img src="img/logo.png" alt=""/></a>
+      <div class="navbar-user">
+        <div class="username usernamestyle" id="navbar-username">
+          <p id="login-user-navbar"></p>
+          <img class="profile-img" src="img/profile.png" alt="" />
+        </div>
+        <div>
+          <button class="btn btn-danger" id="signout-button" onclick="signOut()">Sign out</button>
+        </div>
+      </div>
     </nav>
     <section class="demo">
-        <p></p>
-        <div></div>
+      <p></p>
+      <div></div>
     </section>
     <div>
       <img class="main-img" src="img/1.png" />
@@ -39,7 +50,12 @@
     <section class="final container">
       <div id="tweet-contain">
         <h5 class="title">What do you want to woof?</h5>
-        <input type="text" id="tweet-content" class="form-control" />
+        <div
+          type="text"
+          id="tweet-content"
+          class="form-control"
+          contenteditable="true"
+        ></div>
         <div id="below-input">
           <div id="character"></div>
           <button
@@ -167,27 +183,22 @@
       </footer>
     </footer>
 
-                    </div>
-                </div>
-
-            </div>
-            <div class="footer-copyright text-center py-3">© 2018 Copyright:
-                <a href="https://mdbootstrap.com/education/bootstrap/"> woof.com</a>
-            </div>
-        </footer>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <script src="js/script.js"></script>
-</body>
-
+  </body>
 </html>
