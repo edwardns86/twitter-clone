@@ -67,7 +67,7 @@ function createUsername() {
 }
 
 function checkInput() {
-  const value = inputField.value;
+  const value = inputField.innerText;
   const remainChar = maxCharacters - value.length;
 
   document.getElementById("character").innerHTML = remainChar;
@@ -85,6 +85,7 @@ function checkInput() {
 function isHashTag(a) {
   const index = appState.tweets.findIndex(tweet => tweet.id == a);
   const value = appState.tweets[index];
+  console.log(value)
   const splitValue = value.content.split(" ");
 
   const text = splitValue
@@ -116,7 +117,7 @@ function printName(name) {
 
 function addTweet() {
   let currentUser = document.getElementById("currentUsername").value;
-  let tweetcontent = document.getElementById("tweet-content").value;
+  let tweetcontent = document.getElementById("tweet-content").innerText;
   if (tweetcontent === "") return;
   let obj = {
     id: appState.id++,
@@ -177,8 +178,7 @@ function renderTweet(tweets) {
       const tweetReplies = tweet.replies
         .map(reply => {
           return `
-        <hr>
-        <div class="comment-card>
+        <div class="comment-card">
             <div>
                 <p>
                 <span class="comment-username"><b class="username">${
