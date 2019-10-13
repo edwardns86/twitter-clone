@@ -246,7 +246,7 @@ function renderTweet(tweets) {
 
 function replies(a) {
   let index = appState.tweets.findIndex(tweet => tweet.id === a);
-  let currentUser = document.getElementById("currentUsername").value;
+  // let currentUser = document.getElementById("currentUsername").value;
   const getTweet = appState.tweets[index];
   let promtInput = prompt("enter your message");
 
@@ -325,7 +325,8 @@ function searchHashtag(selectedHashTag) {
 
 const signOut = () => {
   appState.status = false;
-  window.open("signinpage.html");
+  appState.loggedInUser = "";
+  window.open("index.html");
   saveAppState(appState)
 }
 
